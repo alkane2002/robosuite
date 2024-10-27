@@ -735,3 +735,21 @@ class MujocoEnv(metaclass=EnvMeta):
             int: Action space dimension
         """
         raise NotImplementedError
+        
+    def save_state_dict(self):
+        return self.sim.get_state().flatten()
+    
+    def set_specified_state(self, specified = None, value = None):
+        if(specified):
+            self.sim.set_state_from_flattened(value)
+            self.sim.forward()
+            
+    def get_obss(self):
+        observations = (
+            self.viewer._get_observations(force_update=True)
+            if self.viewer_get_obs
+            else self._get_observations(force_update=True)
+        )
+
+        # Return new observations
+        return observations
