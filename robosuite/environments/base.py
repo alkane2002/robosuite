@@ -744,7 +744,7 @@ class MujocoEnv(metaclass=EnvMeta):
             self.sim.set_state_from_flattened(value)
             self.sim.forward()
             
-    def get_obss(self):
+    def get_obs(self):
         observations = (
             self.viewer._get_observations(force_update=True)
             if self.viewer_get_obs
